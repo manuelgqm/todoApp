@@ -1,5 +1,12 @@
 .todo{
-  padding: 5px;
+  padding: 8px;
   margin: 4px;
   background-color: lightgrey;
+}
+.delete{
+  background-color: white;
+  padding: 3px;
+  padding-right: 6px;
+  float: right;
+  border-style: none;
 }

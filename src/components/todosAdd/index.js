@@ -29,11 +29,11 @@ export default class TodosAdd extends Component {
 		};
 	}
 
-	render({}, { text, todosLastId } ){
+	render(){
 		return (
 			<div>
 				<input class={style.newTodo} ref={(a) => this._newTodoElement = a} />
-				<button class={style.addTodo} onClick={() => this.handleClick()}>Add</button>
+				<button class={style.addTodo} onClick={this.handleClick.bind(this)}>Add</button>
 			</div>
 		);
 	}
