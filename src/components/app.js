@@ -1,12 +1,12 @@
 import { h } from 'preact';
 
 import Header from './header';
-import Content from './content';
+import TodoMain from './todoMain';
 
 const App = () => (
 	<div id="app">
 		<Header />
-		<Content />
+		<TodoMain />
 	</div>
 );
 

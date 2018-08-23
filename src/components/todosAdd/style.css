@@ -1,0 +1,14 @@
+.newTodo{
+  padding: 4px;
+  font-size: 12pt;
+  border-color: lightgrey;
+  border-width: 1px;
+  border-style: solid;
+  margin-right: 10px;
+  margin-top: 20px;
+  width: 450px;
+}
+.addTodo{
+  padding: 3px;
+  font-size: 12pt;
+}
