@@ -9,9 +9,9 @@ export default class TodoMain extends Component {
 		this.setState(updatedState);
 	}
 
-	handleDelete = todoId => {
+	handleRemove = todoId => {
 		this.setState( prevState => {
-			deleteTodo(todoId, prevState.todos);
+			removeTodo(todoId, prevState.todos);
 		});
 	}
 
@@ -34,13 +34,13 @@ export default class TodoMain extends Component {
 		return (
 		  <div class={style.todoMain}>
 				<TodosAdd handleUpdate={this.handleUpdate} todos={this.state.todos} todosLastId={this.state.todosLastId} />
-				<TodosList todos={todos} handleDelete={this.handleDelete} />
+				<TodosList todos={todos} handleRemove={this.handleRemove} />
 		  </div>
 		);
 	}
 }
 
-function deleteTodo(id, todos) {
+function removeTodo(id, todos) {
 	let result = todos;
 	return result.splice(todos.findIndex(todo => todo.id === id), 1);
 }
