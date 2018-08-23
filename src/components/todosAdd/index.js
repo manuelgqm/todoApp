@@ -2,7 +2,16 @@ import { h, Component } from 'preact';
 import style from './style';
 
 export default class TodosAdd extends Component {
+
 	handleClick() {
+		this.updateState();
+		if (this.props.handleUpdate){
+			this.props.handleUpdate(this._updatedState);
+		}
+		this._newTodoElement.value = '';
+	}
+
+	updateState(){
 		let newTodoText = this._newTodoElement.value;
 		if ( !valid(newTodoText) ) {
 			return false;
@@ -14,12 +23,10 @@ export default class TodosAdd extends Component {
 			text: newTodoText
 		});
 
-		let updatedState = {
+		this._updatedState = {
 			todosLastId: newTodosLastId,
 			todos: newTodos
 		};
-		this.props.handleUpdate(updatedState);
-		this._newTodoElement.value = '';
 	}
 
 	render({}, { text, todosLastId } ){
