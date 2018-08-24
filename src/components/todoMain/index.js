@@ -1,58 +1,40 @@
 import { h, Component } from 'preact';
 import TodosAdd from '../todosAdd';
 import TodosList from '../todosList';
+import Store from '../../services/Store';
 import style from './style';
 
 export default class TodoMain extends Component {
-
 	handleUpdate = updatedState => {
-		this.setState(updatedState);
+		this.store.updateTodos(updatedState, this);
 	}
 
 	handleRemove = todoId => {
-		this.setState( prevState => {
-			removeTodo(todoId, prevState.todos);
-		});
+		this.store.removeTodo(todoId, this);
 	}
 
-	setTodos = todos => {
-		this.setState({ todos: todos });
-	}
-
-	fetchTodos = er => {
-		fetch('http://virtserver.swaggerhub.com/manuelgqm5/todoApp/1.0.0/todos?query=all')
-			.then(response => response.json())
-			.then(todos => this.setTodos(todos));
-	}
-
-	constructor (props){
+	constructor (props) {
 		super(props);
-		// this.state = {
-		// 	todosLastId: 0,
-		// 	todos: []
-		// };
+		const todosStartingId = 1;
+		const apiUrl = 'http://virtserver.swaggerhub.com/manuelgqm5/todoApp/1.0.0/todos?query=all';
+		this.store = new Store(apiUrl);
 		this.state = {
-			todosLastId: 1,
+			todosLastId: todosStartingId,
 			todos: []
 		};
 	}
 
-	// Fetching todos before component mounting to avoid rendering before fetch is ready
+	// Fetching todos before component mounting to avoid rendering before state is ready
 	componentWillMount(){
-		this.fetchTodos();
+		this.store.loadTodos(this);
 	}
 
 	render ({}, { todos, todosLastId }) {
 		return (
-		  <div class={style.todoMain}>
+			<div class={style.todoMain}>
 				<TodosAdd handleUpdate={this.handleUpdate} todos={this.state.todos} todosLastId={this.state.todosLastId} />
 				<TodosList todos={todos} handleRemove={this.handleRemove} />
-		  </div>
+			</div>
 		);
 	}
-}
-
-function removeTodo(id, todos) {
-	let result = todos;
-	return result.splice(todos.findIndex(todo => todo.id === id), 1);
 }
