@@ -1,13 +1,15 @@
 {
-  "private": true,
+  "private": "true",
   "name": "todoapp",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build",
+    "build_localStorage": "sed -i 's#http://virtserver.swaggerhub.com/manuelgqm5/todoApp/1.0.0#-LOCAL-#g'  src/services/Store.js && preact build",
+    "build_remoteStorage": "sed -i 's#-LOCAL-#http://virtserver.swaggerhub.com/manuelgqm5/todoApp/1.0.0#g' src/services/Store.js && preact build",
     "serve": "preact build && preact serve",
-    "dev": "preact watch",
+    "dev": "sed -i 's#-LOCAL-#http://virtserver.swaggerhub.com/manuelgqm5/todoApp/1.0.0#g' src/services/Store.js && preact watch",
     "lint": "eslint src",
     "test": "jest ./tests"
   },
