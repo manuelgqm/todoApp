@@ -1,6 +1,7 @@
 export default class Store {
-	constructor(apiUrl) {
-		this._apiUrl = apiUrl;
+	constructor() {
+		const apiUrl = '#-LOCAL-#';
+		this._apiUrl = apiUrl.replace(/(#|-)/g, '');
 	}
 
 	loadTodos = component => {
@@ -12,11 +13,10 @@ export default class Store {
 			return;
 		}
 
-		//Guard prevents remote loading if not setted apiUrl
-		if (!this._apiUrl) {
+		if (this._apiUrl === 'LOCAL') {
 			return;
 		}
-		fetch(this._apiUrl)
+		fetch(this._apiUrl + '/todos?query=all')
 			.then(response => response.json())
 			.then(todos => component.setState({ todos }));
 	}
@@ -32,7 +32,7 @@ export default class Store {
 		component.setState(updatedState);
 	}
 
-	// Failed attempt to returning promises instead of passing component
+	// Failed attempt of returning promises instead of passing component
 	// loadTodos = () => {
 	// 	const localTodoState = localStorage.getItem('todoApp');
 	// 	if (localTodoState) {
