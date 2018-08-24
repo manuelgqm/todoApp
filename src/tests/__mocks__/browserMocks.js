@@ -3,7 +3,6 @@
  * An example how to mock localStorage is given below 👇
  */
 
-/*
 // Mocks localStorage
 const localStorageMock = (function() {
 	let store = {};
@@ -18,4 +17,6 @@ const localStorageMock = (function() {
 
 Object.defineProperty(window, 'localStorage', {
 	value: localStorageMock
-}); */
+});
+
+global.fetch = require('jest-fetch-mock');

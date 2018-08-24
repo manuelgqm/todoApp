@@ -32,7 +32,7 @@ export default class TodoMain extends Component {
 	render ({}, { todos, todosLastId }) {
 		return (
 			<div class={style.todoMain}>
-				<TodosAdd handleUpdate={this.handleUpdate} todos={this.state.todos} todosLastId={this.state.todosLastId} />
+				<TodosAdd handleUpdate={this.handleUpdate} todos={todos} todosLastId={todosLastId} />
 				<TodosList todos={todos} handleRemove={this.handleRemove} />
 			</div>
 		);

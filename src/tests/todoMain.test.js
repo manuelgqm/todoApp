@@ -4,7 +4,6 @@ import { shallow } from 'preact-render-spy';
 
 const setup = propOverrides => {
 	const props = Object.assign({
-		todos: [],
 		handleUpdate: jest.fn(),
 		handleRemove: jest.fn()
 	}, propOverrides);
