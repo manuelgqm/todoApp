@@ -15,6 +15,16 @@ export default class TodoMain extends Component {
 		});
 	}
 
+	setTodos = todos => {
+		this.setState({ todos: todos });
+	}
+
+	fetchTodos = er => {
+		fetch('http://virtserver.swaggerhub.com/manuelgqm5/todoApp/1.0.0/todos?query=all')
+			.then(response => response.json())
+			.then(todos => this.setTodos(todos));
+	}
+
 	constructor (props){
 		super(props);
 		// this.state = {
@@ -22,12 +32,14 @@ export default class TodoMain extends Component {
 		// 	todos: []
 		// };
 		this.state = {
-			todosLastId: 2,
-			todos: [
-				{ id: 1, text: 'create todos list' },
-				{ id: 2, text: 'create todo add box' }
-			]
+			todosLastId: 1,
+			todos: []
 		};
+	}
+
+	// Fetching todos before component mounting to avoid rendering before fetch is ready
+	componentWillMount(){
+		this.fetchTodos();
 	}
 
 	render ({}, { todos, todosLastId }) {
