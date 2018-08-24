@@ -23,8 +23,7 @@ export default class TodoMain extends Component {
 		};
 	}
 
-	// Fetching todos before component mounting to avoid rendering before state is ready
-	componentWillMount(){
+	componentDidMount(){
 		this.store.loadTodos(this);
 	}
 
