@@ -16,8 +16,7 @@ export default class TodoMain extends Component {
 	constructor (props) {
 		super(props);
 		const todosStartingId = 1;
-		const apiUrl = 'http://virtserver.swaggerhub.com/manuelgqm5/todoApp/1.0.0/todos?query=all';
-		this.store = new Store(apiUrl);
+		this.store = new Store();
 		this.state = {
 			todosLastId: todosStartingId,
 			todos: []
